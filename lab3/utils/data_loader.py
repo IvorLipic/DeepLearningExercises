@@ -83,7 +83,7 @@ class NLPDataset(Dataset):
                 instances.append(Instance(tokens, label))
         return cls(instances)
     
-def load_embeddings(vocab, embedding_path=None, embed_dim=300):
+def load_embeddings(vocab, embedding_path=None, embed_dim=300, freeze=True):
     # Initialize with random normal distribution
     embeddings = torch.randn(len(vocab), embed_dim)
     
@@ -94,7 +94,7 @@ def load_embeddings(vocab, embedding_path=None, embed_dim=300):
     if embedding_path:
         with open(embedding_path, 'r') as f:
             for line in f:
-                parts = line.strip().split(',')
+                parts = line.strip().split(' ')
                 token = parts[0]
                 vector = torch.tensor([float(x) for x in parts[1:]])
                 
@@ -103,7 +103,7 @@ def load_embeddings(vocab, embedding_path=None, embed_dim=300):
                     embeddings[idx] = vector
     
     return nn.Embedding.from_pretrained(
-        embeddings, freeze=True, padding_idx=0
+        embeddings, freeze=freeze, padding_idx=0
     )
 
 def pad_collate_fn(batch, pad_index=0):
@@ -120,7 +120,7 @@ def pad_collate_fn(batch, pad_index=0):
 if __name__=="__main__":
     shuffle = False
     batch_size = 2
-    train_dataset = NLPDataset.from_file('sst_train_raw.csv')
+    train_dataset = NLPDataset.from_file('data/sst_train_raw.csv')
 
     instance_text, instance_label = train_dataset.instances[3].text, train_dataset.instances[3].label
 

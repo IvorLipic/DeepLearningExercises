@@ -1,0 +1,198 @@
+Config:
+    train_batch = 10
+    val_batch = 32
+    lr = 1e-4
+    epochs = 5
+    hidden_dim = 150
+    embed_dim = 300
+    clip = 0.25
+
+1. seed 7052020
+    Epoch 1/5 (33.0s)
+    Valid Loss: 0.5215 | Acc: 75.62% | F1: 0.7279
+    Confusion Matrix:
+    [[783 126]
+    [318 594]]
+
+    Epoch 2/5 (32.6s)
+    Valid Loss: 0.4617 | Acc: 79.08% | F1: 0.7972
+    Confusion Matrix:
+    [[691 218]
+    [163 749]]
+
+    Epoch 3/5 (32.8s)
+    Valid Loss: 0.4505 | Acc: 79.41% | F1: 0.7976
+    Confusion Matrix:
+    [[707 202]
+    [173 739]]
+
+    Epoch 4/5 (32.9s)
+    Valid Loss: 0.4477 | Acc: 79.63% | F1: 0.7945
+    Confusion Matrix:
+    [[733 176]
+    [195 717]]
+
+    Epoch 5/5 (33.1s)
+    Valid Loss: 0.4443 | Acc: 79.79% | F1: 0.8011
+    Confusion Matrix:
+    [[712 197]
+    [171 741]]
+
+    ==================================================
+    Final Test Results:
+    Test Loss: 0.4548 | Accuracy: 79.358% | F1: 0.7959
+    Confusion Matrix:
+    [[341 103]
+    [ 77 351]]
+
+2. seed 705202
+    Epoch 1/5 (32.2s)
+    Valid Loss: 0.5483 | Acc: 72.93% | F1: 0.7689
+    Confusion Matrix:
+    [[508 401]
+    [ 92 820]]
+
+    Epoch 2/5 (31.9s)
+    Valid Loss: 0.5537 | Acc: 73.97% | F1: 0.7749
+    Confusion Matrix:
+    [[531 378]
+    [ 96 816]]
+
+    Epoch 3/5 (31.6s)
+    Valid Loss: 0.5639 | Acc: 73.48% | F1: 0.7695
+    Confusion Matrix:
+    [[532 377]
+    [106 806]]
+
+    Epoch 4/5 (32.4s)
+    Valid Loss: 0.6311 | Acc: 71.94% | F1: 0.7670
+    Confusion Matrix:
+    [[469 440]
+    [ 71 841]]
+
+    Epoch 5/5 (32.0s)
+    Valid Loss: 0.6761 | Acc: 71.77% | F1: 0.7676
+    Confusion Matrix:
+    [[458 451]
+    [ 63 849]]
+
+    ==================================================
+    Final Test Results:
+    Test Loss: 0.6882 | Accuracy: 71.789% | F1: 0.7644
+    Confusion Matrix:
+    [[227 217]
+    [ 29 399]]
+
+3. seed 70520
+    Epoch 1/5 (31.8s)
+    Valid Loss: 0.4883 | Acc: 77.16% | F1: 0.7704
+    Confusion Matrix:
+    [[707 202]
+    [214 698]]
+
+    Epoch 2/5 (31.5s)
+    Valid Loss: 0.5004 | Acc: 75.56% | F1: 0.7872
+    Confusion Matrix:
+    [[553 356]
+    [ 89 823]]
+
+    Epoch 3/5 (32.2s)
+    Valid Loss: 0.4907 | Acc: 77.05% | F1: 0.7836
+    Confusion Matrix:
+    [[646 263]
+    [155 757]]
+
+    Epoch 4/5 (31.3s)
+    Valid Loss: 0.4824 | Acc: 78.25% | F1: 0.8004
+    Confusion Matrix:
+    [[631 278]
+    [118 794]]
+
+    Epoch 5/5 (31.7s)
+    Valid Loss: 0.5147 | Acc: 76.39% | F1: 0.7962
+    Confusion Matrix:
+    [[551 358]
+    [ 72 840]]
+
+    ==================================================
+    Final Test Results:
+    Test Loss: 0.5327 | Accuracy: 75.573% | F1: 0.7864
+    Confusion Matrix:
+    [[267 177]
+    [ 36 392]]
+
+4. seed 7052
+    Epoch 1/5 (31.7s)
+    Valid Loss: 0.5758 | Acc: 71.61% | F1: 0.7621
+    Confusion Matrix:
+    [[476 433]
+    [ 84 828]]
+
+    Epoch 2/5 (32.2s)
+    Valid Loss: 0.6458 | Acc: 70.68% | F1: 0.7562
+    Confusion Matrix:
+    [[459 450]
+    [ 84 828]]
+
+    Epoch 3/5 (31.7s)
+    Valid Loss: 0.7210 | Acc: 71.99% | F1: 0.7608
+    Confusion Matrix:
+    [[500 409]
+    [101 811]]
+
+    Epoch 4/5 (32.3s)
+    Valid Loss: 0.7901 | Acc: 69.69% | F1: 0.7507
+    Confusion Matrix:
+    [[438 471]
+    [ 81 831]]
+
+    Epoch 5/5 (32.0s)
+    Valid Loss: 0.8445 | Acc: 68.75% | F1: 0.7501
+    Confusion Matrix:
+    [[398 511]
+    [ 58 854]]
+
+    ==================================================
+    Final Test Results:
+    Test Loss: 0.8582 | Accuracy: 68.349% | F1: 0.7454
+    Confusion Matrix:
+    [[192 252]
+    [ 24 404]]
+
+5. seed 705
+    Epoch 1/5 (32.6s)
+    Valid Loss: 0.5361 | Acc: 74.90% | F1: 0.7117
+    Confusion Matrix:
+    [[800 109]
+    [348 564]]
+
+    Epoch 2/5 (32.2s)
+    Valid Loss: 0.6074 | Acc: 73.42% | F1: 0.6769
+    Confusion Matrix:
+    [[830  79]
+    [405 507]]
+
+    Epoch 3/5 (32.8s)
+    Valid Loss: 0.5857 | Acc: 75.07% | F1: 0.7090
+    Confusion Matrix:
+    [[814  95]
+    [359 553]]
+
+    Epoch 4/5 (33.3s)
+    Valid Loss: 0.5356 | Acc: 75.95% | F1: 0.7313
+    Confusion Matrix:
+    [[787 122]
+    [316 596]]
+
+    Epoch 5/5 (32.9s)
+    Valid Loss: 0.4466 | Acc: 80.07% | F1: 0.7987
+    Confusion Matrix:
+    [[738 171]
+    [192 720]]
+
+    ==================================================
+    Final Test Results:
+    Test Loss: 0.4651 | Accuracy: 79.702% | F1: 0.7910
+    Confusion Matrix:
+    [[360  84]
+    [ 93 335]]
