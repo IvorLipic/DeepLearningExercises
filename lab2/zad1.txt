@@ -1,0 +1,128 @@
+## train.py
+
+Ulaz je mini-grupa grayscale slika:
+    Shape = (B, 1, 28, 28)
+
+1. sloj (conv)
+    kernel -> (5 x 5)
+    input_channels = 1 (gray)
+    output_channels = 16
+    padding = SAME = (5 - 1) // 2
+    stride = 1 (always, this implementation doesn't support stride)
+    output_size -> (28 - 5 + 2 * 2) / 1 + 1 = 28
+     -> (input_size - kernel_size + 2 * padding) / stride + 1
+    ----------------------------------------
+    Shape = (B, 16, 28, 28)
+
+2. sloj (pool)
+    pool_size = 2
+    stride = 2
+    output_size -> 28 / 2 = 14
+    ----------------------------------------
+    Shape = (B, 16, 14, 14)
+
+3. sloj (relu)
+    Shape = (B, 16, 14, 14)
+
+4. sloj (conv)
+    kernel -> (5 x 5)
+    input_channels = 16
+    output_channels = 32
+    padding = SAME = (5 - 1) // 2 = 2
+    stride = 1 
+    output_size -> (14 - 5 + 4) / 1 + 1 = 14
+    ----------------------------------------
+    Shape = (B, 32, 14, 14)
+
+5. sloj (pool)
+    pool_size = 2
+    stride = 2
+    output_size = 14 / 2 = 7
+    ----------------------------------------
+    Shape = (B, 32, 7, 7)
+
+6. sloj (relu)
+    Shape = (B, 32, 7, 7)
+
+5. sloj (flatten)
+    Shape = (B, 32 * 7 * 7)
+          = (B, 1568)
+
+6. sloj (fc)
+    input_size = 1568
+    output_size = 512
+    ----------------------------------------
+    Shape = (B, 512)
+
+7. sloj (relu)
+    Shape = (B, 512)
+
+8. sloj (fc)
+    input_size = 512
+    output_size = 10
+    ----------------------------------------
+    Shape = (B, 10)
+----------------------------------------
+Memorijski zahtjevi (4-byte float), B = 50
+
+    Input -> (50, 1, 28, 28) -> 39200 floats
+          -> 153.125 kB
+    Conv1 -> (50, 16, 28, 28) -> 627200 floats
+          -> 2450 kB
+    Pool1 -> (50, 16, 14, 14) -> 156800 floats
+          -> 612.5 kB
+    Relu1 -> 612.5 kB
+    Conv2 -> (50, 32, 14, 14) -> 313600 floats
+          -> 1225 kB
+    Pool2 -> (50, 32, 7, 7) -> 78400 floats
+          -> 306.25 kB
+    Relu2 -> 306.25 kB
+    FC3   -> (50, 512) -> 25600 floats
+          -> 100 kB 
+    Relu3 -> 100 kB
+    Logits -> (50, 10) -> 500 floats
+           -> 1.95 kB
+    TOTAL: 5867.575 kB
+----------------------------------------
+Broj parametara u svakom sloju:
+- Konvolucijski:
+    num_params = (c_in * K * K + 1) * c_out
+        c_in - input_channels
+        c_out - output_channels
+        K - kernel_size
+    
+    - conv1 - (1 * 5 * 5 + 1) * 16 = 416
+    - conv2 - (16 * 5 * 5 + 1) * 32 = 12832
+
+- FC (i logits):
+    num_params = (in + 1) * out
+        in - num of input_neurons
+        out - num of output_neurons
+    
+    - fc3 - (1568 + 1) * 512 = 803328
+    - logits - (512 + 1) * 10 = 5130
+
+Total params = 416 + 12832 + 803328 + 5130 =
+             = 821706
+
+----------------------------------------
+Veličina receptivnog polja conv2:
+    RF = prev_RF + (K - 1) * product_of_prev_strides
+    
+    1. conv1 -> RF = 1 + (5 - 1) * 1 = 5
+    2. pool1 -> RF = 5 + (2 - 1) * 1 = 6
+    3. conv2 -> RF = 6 + (5 - 1) * 1 * 2 = 14
+    4. pool2 -> RF = 14 + (2 - 1) * 1 * 2 * 1 = 16
+
+    RF_total = 16, RF_conv2 = 14
+
+----------------------------------------
+Veza između početnog iznosa funkcije gubitka i broja razreda C:
+
+    Ako su inicijalne težine mreže nasumične, izlazne vjerojatnosti softmax fje. približno su jednake za sve klase 1/C,
+    uz to vektor oznaka y je one hot kodiran pa samo jedan element u vektoru je 1, radi toga imamo:
+
+                                            L = -sum_{i = 1, C}(y * ln[p(y)])
+                                            L = -ln(1/C) = ln(C)
+
+    Za MNIST C = 10 -> L = ln10 = 2.3, što je očekivani početni gubitak.

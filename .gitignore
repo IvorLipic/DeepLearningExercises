@@ -1,0 +1,20 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython build artifacts
+lab2/build/
+lab2/im2col_cython.c
+lab2/im2col_cython.*.pyd
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Virtual environment folders (if used)
+venv/
+.env/
+
+# PyTorch cache (optional)
+~/.torch/
