@@ -44,7 +44,7 @@ def run_single_config(config):
     train_loader, valid_loader, test_loader, text_vocab = prepare_data(config)
     embedding_layer = load_pretrained_embeddings(config, text_vocab)
     model, optimizer, criterion = build_model_and_optimizer(config, embedding_layer)
-    val_loss, val_acc, _ = train_and_evaluate(model, optimizer, criterion, config, train_loader, valid_loader, test_loader, return_val_metrics=True)
+    val_loss, val_acc, _ , _ = train_and_evaluate(model, optimizer, criterion, config, train_loader, valid_loader, test_loader, return_val_metrics=True)
     return val_loss, val_acc
 
 
@@ -83,7 +83,7 @@ def grid_search():
         for acc, rnn_type, h, l, d, b in results[:5]:
             f.write(f"{rnn_type.upper()} | h={h} l={l} d={d} bi={b} -> val_acc={acc:.4f}\n")
 
-    return results[0]  # return best configuration
+    return results[0]
 
 
 def evaluate_best_config_multiple_seeds(best_config_tuple):

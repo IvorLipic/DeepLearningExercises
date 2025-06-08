@@ -119,7 +119,7 @@ def evaluate(model, loader, criterion, args):
     
     return avg_loss, acc, f1, cm
 
-def train_and_evaluate(model, optimizer, criterion, config, train_loader, valid_loader, test_loader):
+def train_and_evaluate(model, optimizer, criterion, config, train_loader, valid_loader, test_loader, return_val_metrics=False):
     print("\nStarting training...")
     for epoch in range(config.epochs):
         start_time = time.time()
@@ -136,3 +136,5 @@ def train_and_evaluate(model, optimizer, criterion, config, train_loader, valid_
     print(f"Final Test Results:")
     print(f"Test Loss: {test_loss:.4f} | Accuracy: {test_acc*100:.3f}% | F1: {test_f1:.4f}")
     print(f"Confusion Matrix:\n{test_cm}")
+    if(return_val_metrics):
+        return evaluate(model, valid_loader, criterion, config)
