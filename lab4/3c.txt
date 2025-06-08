@@ -1,0 +1,6 @@
+= Using device cuda
+> Loaded 60000 training images!
+> Loaded 10000 validation images!
+Computing mean representations in image space...
+Evaluating in image space...
+Test accuracy using raw image vectors: 81.96%

@@ -1,0 +1,32 @@
+=== RNN + Attention Comparison ===
+
+[RNN] attention=False seed=7052020 -> val_acc=0.7606, val_loss=0.5127, val_f1=0.7736
+[RNN] attention=False seed=705202 -> val_acc=0.6941, val_loss=0.7066, val_f1=0.7506
+[RNN] attention=False seed=70520 -> val_acc=0.7496, val_loss=0.5701, val_f1=0.7827
+>>> MEAN [RNN] attn=False: acc=0.7348 ± 0.0356, loss=0.5965 ± 0.0996, f1=0.7689 ± 0.0165
+
+[RNN] attention=True seed=7052020 -> val_acc=0.8111, val_loss=0.4385, val_f1=0.8050
+[RNN] attention=True seed=705202 -> val_acc=0.7276, val_loss=0.7906, val_f1=0.7702
+[RNN] attention=True seed=70520 -> val_acc=0.7968, val_loss=0.4506, val_f1=0.8103
+>>> MEAN [RNN] attn=True: acc=0.7785 ± 0.0446, loss=0.5599 ± 0.1999, f1=0.7951 ± 0.0218
+
+[GRU] attention=False seed=7052020 -> val_acc=0.8072, val_loss=0.4594, val_f1=0.7991
+[GRU] attention=False seed=705202 -> val_acc=0.7523, val_loss=0.5914, val_f1=0.7866
+[GRU] attention=False seed=70520 -> val_acc=0.8051, val_loss=0.4327, val_f1=0.8107
+>>> MEAN [GRU] attn=False: acc=0.7882 ± 0.0311, loss=0.4945 ± 0.0850, f1=0.7988 ± 0.0121
+
+[GRU] attention=True seed=7052020 -> val_acc=0.8045, val_loss=0.5006, val_f1=0.7975
+[GRU] attention=True seed=705202 -> val_acc=0.7677, val_loss=0.5694, val_f1=0.7909
+[GRU] attention=True seed=70520 -> val_acc=0.8051, val_loss=0.4666, val_f1=0.8162
+>>> MEAN [GRU] attn=True: acc=0.7924 ± 0.0214, loss=0.5122 ± 0.0524, f1=0.8015 ± 0.0131
+
+[LSTM] attention=False seed=7052020 -> val_acc=0.7864, val_loss=0.4730, val_f1=0.8024
+[LSTM] attention=False seed=705202 -> val_acc=0.7529, val_loss=0.6580, val_f1=0.7881
+[LSTM] attention=False seed=70520 -> val_acc=0.7825, val_loss=0.5309, val_f1=0.8059
+>>> MEAN [LSTM] attn=False: acc=0.7739 ± 0.0183, loss=0.5540 ± 0.0947, f1=0.7988 ± 0.0094
+
+[LSTM] attention=True seed=7052020 -> val_acc=0.7781, val_loss=0.5567, val_f1=0.7446
+[LSTM] attention=True seed=705202 -> val_acc=0.7743, val_loss=0.5348, val_f1=0.8008
+[LSTM] attention=True seed=70520 -> val_acc=0.8144, val_loss=0.4421, val_f1=0.8149
+>>> MEAN [LSTM] attn=True: acc=0.7889 ± 0.0221, loss=0.5112 ± 0.0608, f1=0.7868 ± 0.0372
+

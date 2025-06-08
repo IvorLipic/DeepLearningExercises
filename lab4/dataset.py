@@ -5,7 +5,7 @@ import torchvision
 
 
 class MNISTMetricDataset(Dataset):
-    def __init__(self, root="/tmp/mnist/", split='train'):
+    def __init__(self, root="/tmp/mnist/", split='train', remove_class=None):
         super().__init__()
         assert split in ['train', 'test', 'traineval']
         self.root = root
@@ -13,6 +13,11 @@ class MNISTMetricDataset(Dataset):
         mnist_ds = torchvision.datasets.MNIST(self.root, train='train' in split, download=True)
         self.images, self.targets = mnist_ds.data.float() / 255., mnist_ds.targets
         self.classes = list(range(10))
+
+        if remove_class is not None:
+            mask = self.targets != remove_class
+            self.images = self.images[mask]
+            self.targets = self.targets[mask]
 
         self.target2indices = defaultdict(list)
         for i in range(len(self.images)):
@@ -30,7 +35,9 @@ class MNISTMetricDataset(Dataset):
     def _sample_negative(self, index):
         target_id = self.targets[index].item()
         # Class that isn't same as anchor
-        negative_classes = [cls for cls in self.classes if cls != target_id]
+        negative_classes = [cls for cls in self.classes if cls != target_id and len(self.target2indices[cls]) > 0]
+        if not negative_classes:
+            raise IndexError("No negative class available to sample from")
         negative_class = choice(negative_classes)
         negative_indices = self.target2indices[negative_class]
         return choice(negative_indices)

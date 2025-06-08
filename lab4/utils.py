@@ -61,6 +61,9 @@ def evaluate(model, repr, loader, device):
     return correct/total
 
 '''
+Class prototypes are simply the (normalized) mean of every training embedding of that class.
+Classification: For a new sample embedding r, we compute L2 distances to each prototype and pick the class with minimum distance.
+
 Alternatives:
     k-NN: Instead of a single “mean” prototype, 
           keep all training embeddings and do k-nearest-neighbors at inference.

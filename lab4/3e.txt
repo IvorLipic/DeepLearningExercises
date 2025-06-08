@@ -1,0 +1,86 @@
+= Using device cuda
+> Loaded 60000 training images!
+> Loaded 10000 validation images!
+Epoch: 0
+Iter: 0, Mean Loss: 0.869
+Iter: 100, Mean Loss: 0.380
+Iter: 200, Mean Loss: 0.287
+Iter: 300, Mean Loss: 0.234
+Iter: 400, Mean Loss: 0.199
+Iter: 500, Mean Loss: 0.177
+Iter: 600, Mean Loss: 0.161
+Iter: 700, Mean Loss: 0.149
+Iter: 800, Mean Loss: 0.140
+Mean Loss in Epoch 0: 0.136
+Computing mean representations for evaluation...
+Evaluating on test set...
+Epoch 0: Test Accuracy: 90.73%
+Epoch time (sec): 54.4
+Epoch: 1
+Iter: 0, Mean Loss: 0.034
+Iter: 100, Mean Loss: 0.054
+Iter: 200, Mean Loss: 0.058
+Iter: 300, Mean Loss: 0.057
+Iter: 400, Mean Loss: 0.058
+Iter: 500, Mean Loss: 0.059
+Iter: 600, Mean Loss: 0.058
+Iter: 700, Mean Loss: 0.058
+Iter: 800, Mean Loss: 0.057
+Mean Loss in Epoch 1: 0.056
+Computing mean representations for evaluation...
+Evaluating on test set...
+Epoch 1: Test Accuracy: 92.19%
+Epoch time (sec): 53.9
+Epoch: 2
+Iter: 0, Mean Loss: 0.041
+Iter: 100, Mean Loss: 0.058
+Iter: 200, Mean Loss: 0.052
+Iter: 300, Mean Loss: 0.050
+Iter: 400, Mean Loss: 0.049
+Iter: 500, Mean Loss: 0.048
+Iter: 600, Mean Loss: 0.048
+Iter: 700, Mean Loss: 0.047
+Iter: 800, Mean Loss: 0.046
+Mean Loss in Epoch 2: 0.046
+Computing mean representations for evaluation...
+Evaluating on test set...
+Epoch 2: Test Accuracy: 93.88%
+Epoch time (sec): 54.6
+Epoch: 3
+Iter: 0, Mean Loss: 0.071
+Iter: 100, Mean Loss: 0.037
+Iter: 200, Mean Loss: 0.040
+Iter: 300, Mean Loss: 0.041
+Iter: 400, Mean Loss: 0.041
+Iter: 500, Mean Loss: 0.042
+Iter: 600, Mean Loss: 0.041
+Iter: 700, Mean Loss: 0.040
+Iter: 800, Mean Loss: 0.039
+Mean Loss in Epoch 3: 0.039
+Computing mean representations for evaluation...
+Evaluating on test set...
+Epoch 3: Test Accuracy: 95.13%
+Epoch time (sec): 54.7
+Epoch: 4
+Iter: 0, Mean Loss: 0.017
+Iter: 100, Mean Loss: 0.035
+Iter: 200, Mean Loss: 0.036
+Iter: 300, Mean Loss: 0.035
+Iter: 400, Mean Loss: 0.036
+Iter: 500, Mean Loss: 0.035
+Iter: 600, Mean Loss: 0.035
+Iter: 700, Mean Loss: 0.035
+Iter: 800, Mean Loss: 0.034
+Mean Loss in Epoch 4: 0.034
+Computing mean representations for evaluation...
+Evaluating on test set...
+Epoch 4: Test Accuracy: 94.39%
+Epoch time (sec): 54.6
+Model parameters saved to metric_embedding_no0.pth
+
+
+High accuracy - the model learns to group digits by appearance
+              - even though it hasn't seen 0s, the learned features for other digits are strong enough to place 0s apart from them
+              - digit "0" has different structure than others
+              - even an unseen digit can land in its own region of the feature space
+              - as long as embedding space organizes data well, you can classify via proximity

@@ -37,3 +37,13 @@ class SimpleMetricEmbedding(nn.Module):
         neg_dist = F.pairwise_distance(a_x, n_x)
         loss = F.relu(pos_dist - neg_dist + margin).mean()
         return loss
+
+class IdentityModel(nn.Module):
+    def __init__(self):
+        super(IdentityModel, self).__init__()
+
+    def get_features(self, img):
+        # img: (B, 1, 28, 28) → flatten to (B, 784)
+        feats = img.view(img.size(0), -1)
+        feats = feats / torch.linalg.vector_norm(feats, dim=1, keepdim=True)  # Normalize
+        return feats

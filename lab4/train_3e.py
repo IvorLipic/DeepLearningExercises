@@ -13,7 +13,6 @@ if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(f"= Using device {device}")
 
-    # CHANGE ACCORDING TO YOUR PREFERENCE
     mnist_download_root = "./mnist/"
     ds_train = MNISTMetricDataset(mnist_download_root, split='train')
     ds_test = MNISTMetricDataset(mnist_download_root, split='test')
@@ -21,16 +20,33 @@ if __name__ == '__main__':
 
     num_classes = 10
 
+    # Training data - remove class 0
+    ds_train_filtered = MNISTMetricDataset(mnist_download_root, split='train', remove_class=0)
+
+    # Representation data - all classes (for averaging)
+    ds_train_all = MNISTMetricDataset(mnist_download_root, split='train', remove_class=None)
+
+    ds_test = MNISTMetricDataset(mnist_download_root, split='test')
+    ds_traineval = MNISTMetricDataset(mnist_download_root, split='traineval')
+
     print(f"> Loaded {len(ds_train)} training images!")
     print(f"> Loaded {len(ds_test)} validation images!")
 
-    train_loader = DataLoader(
-        ds_train,
+    train_loader_filtered = DataLoader(
+        ds_train_filtered,
         batch_size=64,
         shuffle=True,
         pin_memory=True,
         num_workers=4,
         drop_last=True
+    )
+
+    train_loader_all = DataLoader(
+        ds_train_all,
+        batch_size=1,
+        shuffle=False,
+        pin_memory=True,
+        num_workers=1
     )
 
     test_loader = DataLoader(
@@ -56,15 +72,15 @@ if __name__ == '__main__':
         lr=1e-3
     )
 
-    epochs = 3
+    epochs = 5
     for epoch in range(epochs):
         print(f"Epoch: {epoch}")
         t0 = time.time_ns()
-        train_loss = train(model, optimizer, train_loader, device)
+        train_loss = train(model, optimizer, train_loader_filtered, device)
         print(f"Mean Loss in Epoch {epoch}: {train_loss:.3f}")
         if EVAL_ON_TEST or EVAL_ON_TRAIN:
             print("Computing mean representations for evaluation...")
-            representations = compute_representations(model, train_loader, num_classes, emb_size, device)
+            representations = compute_representations(model, train_loader_all, num_classes, emb_size, device)
         if EVAL_ON_TRAIN:
             print("Evaluating on training set...")
             acc1 = evaluate(model, representations, traineval_loader, device)
@@ -75,3 +91,9 @@ if __name__ == '__main__':
             print(f"Epoch {epoch}: Test Accuracy: {acc1 * 100:.2f}%")
         t1 = time.time_ns()
         print(f"Epoch time (sec): {(t1-t0)/10**9:.1f}")
+    
+    torch.save(model.state_dict(), "metric_embedding_no0.pth")
+    print("Model parameters saved to metric_embedding_no0.pth")
+
+
+

@@ -70,7 +70,8 @@ def build_model_and_optimizer(args, embedding_layer):
                          rnn_type=args.rnn_type,
                          num_layers=args.num_layers,
                          bidirectional=args.bidirectional,
-                         dropout=args.dropout)
+                         dropout=args.dropout,
+                         use_attention=args.use_attention)
     model.to(args.device)
     optimizer = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=args.lr)
     criterion = nn.BCEWithLogitsLoss()
