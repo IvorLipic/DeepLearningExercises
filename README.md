@@ -48,4 +48,4 @@ Triplet-loss-based metric learning:
 ## Acknowledgments
 
 University of Zagreb, Faculty of Electrical Engineering and Computing (FER)  
-Course: [Duboko učenje 2](https://www.fer.unizg.hr/predmet/dubuce1)
+Course: [Duboko učenje 1](https://www.fer.unizg.hr/predmet/dubuce1)
