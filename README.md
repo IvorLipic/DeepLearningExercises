@@ -44,3 +44,8 @@ Triplet-loss-based metric learning:
 - PyTorch, torchvision
 - NumPy, scikit-learn, matplotlib, scipy, scikit-image
 - (Lab 3) GloVe pretrained embeddings
+
+## Acknowledgments
+
+University of Zagreb, Faculty of Electrical Engineering and Computing (FER)  
+Course: [Duboko učenje 2](https://www.fer.unizg.hr/predmet/dubuce1)
